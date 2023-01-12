@@ -3,8 +3,8 @@ import telnetlib
 import pandas as pd
 import time
 
-df = pd.read_csv('teste.csv')
-HOST = '10.7.0.66'
+df = pd.read_csv('pon4.csv')
+HOST = '10.7.0.106'
 user = input("Digite o login: ")
 password= getpass.getpass()
 
