@@ -68,4 +68,4 @@ for i,linhas in df .iterrows():
         print(retorno)
         time.sleep(0.1)
         tn.write(b"end")
-        tn.close()
+    else:
