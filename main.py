@@ -2,9 +2,9 @@ import telnetlib
 import pandas as pd
 import time
 
-df = pd.read_csv('PON 1-14.csv')
+df = pd.read_csv('PON 11-8_ssss - Página1.csv')
 
-HOST = '10.7.0.106'
+HOST = '10.7.0.66'
 user = 'noc'
 password = '6O7noNaoiMClIn7e'
 
@@ -25,12 +25,12 @@ def bridge():
     retorno = tn.read_until(b"#", timeout=0.5).decode("ascii")
     print(retorno)
     time.sleep(0.1)
-    tn.write(b"interface gpon-olt_1/3/" + pon_ + b"\n")
+    tn.write(b"interface gpon-olt_1/4/" + pon_ + b"\n")
     time.sleep(0.1)
     tn.write(b"onu " + num_ + b" type F601 sn " + sn_ + b"\n")
     tn.write(b"exit \n")
     time.sleep(0.1)
-    tn.write(b"interface gpon-onu_1/3/" + pon_ + b":" + num_ + b"\n")
+    tn.write(b"interface gpon-onu_1/4/" + pon_ + b":" + num_ + b"\n")
     time.sleep(0.1)
     tn.write(b"description " + desc_ + b"\n")
     time.sleep(0.1)
@@ -41,7 +41,7 @@ def bridge():
     tn.write(b"service-port 1 vport 1 user-vlan 70 vlan 70 \n")
     tn.write(b"exit \n")
     time.sleep(0.1)
-    tn.write(b"pon-onu-mng gpon-onu_1/3/" + pon_ + b":" + num_ + b"\n")
+    tn.write(b"pon-onu-mng gpon-onu_1/4/" + pon_ + b":" + num_ + b"\n")
     time.sleep(0.1)
     tn.write(b"service 1 gemport 1 vlan 70 \n")
     time.sleep(0.1)
@@ -58,12 +58,12 @@ def pppoe():
     retorno = tn.read_until(b"#", timeout=0.5).decode("ascii")
     print(retorno)
     time.sleep(0.1)
-    tn.write(b"interface gpon-olt_1/3/" + pon_ + b"\n")
+    tn.write(b"interface gpon-olt_1/4/" + pon_ + b"\n")
     time.sleep(0.1)
     tn.write(b"onu " + num_ + b" type F601 sn " + sn_ + b"\n")
     tn.write(b"exit \n")
     time.sleep(0.1)
-    tn.write(b"interface gpon-onu_1/3/" + pon_ + b":" + num_ + b"\n")
+    tn.write(b"interface gpon-onu_1/4/" + pon_ + b":" + num_ + b"\n")
     time.sleep(0.1)
     tn.write(b"description " + desc_ + b"\n")
     time.sleep(0.1)
@@ -74,7 +74,7 @@ def pppoe():
     tn.write(b"service-port 1 vport 1 user-vlan 70 vlan 70 \n")
     tn.write(b"exit \n")
     time.sleep(0.1)
-    tn.write(b"pon-onu-mng gpon-onu_1/3/" + pon_ + b":" + num_ + b"\n")
+    tn.write(b"pon-onu-mng gpon-onu_1/4/" + pon_ + b":" + num_ + b"\n")
     time.sleep(0.1)
     tn.write(b"service 1 gemport 1 vlan 70 \n")
     time.sleep(0.1)
@@ -92,12 +92,12 @@ def bridge2portas():
     retorno = tn.read_until(b"#", timeout=0.5).decode("ascii")
     print(retorno)
     time.sleep(0.1)
-    tn.write(b"interface gpon-olt_1/3/" + pon_ + b"\n")
+    tn.write(b"interface gpon-olt_1/4/" + pon_ + b"\n")
     time.sleep(0.1)
     tn.write(b"onu " + num_ + b" type F612 sn " + sn_ + b"\n")
     tn.write(b"exit \n")
     time.sleep(0.1)
-    tn.write(b"interface gpon-onu_1/3/" + pon_ + b":" + num_ + b"\n")
+    tn.write(b"interface gpon-onu_1/4/" + pon_ + b":" + num_ + b"\n")
     time.sleep(0.1)
     tn.write(b"description " + desc_ + b"\n")
     time.sleep(0.1)
@@ -108,7 +108,7 @@ def bridge2portas():
     tn.write(b"service-port 1 vport 1 user-vlan 70 vlan 70 \n")
     tn.write(b"exit \n")
     time.sleep(0.1)
-    tn.write(b"pon-onu-mng gpon-onu_1/3/" + pon_ + b":" + num_ + b"\n")
+    tn.write(b"pon-onu-mng gpon-onu_1/4/" + pon_ + b":" + num_ + b"\n")
     time.sleep(0.1)
     tn.write(b"service 1 gemport 1 vlan 70 \n")
     time.sleep(0.1)
@@ -157,6 +157,12 @@ for i,linhas in df .iterrows():
 
     elif "HG" in df.loc[i, 'MODELO']:
         print("executando script para HUAWEI HG")
+        pppoe()
+    elif "F670" in df.loc[i, 'MODELO']:
+        print("executando script para ZTE F680")
+        pppoe()
+    elif "F660" in df.loc[i, 'MODELO']:
+        print("executando script para ZTE F680")
         pppoe()
     else:
         print(f"{sn} É de outro modelo")
