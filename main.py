@@ -2,7 +2,7 @@ import telnetlib
 import pandas as pd
 import time
 
-df = pd.read_csv('PON 11-8_ssss - Página1.csv')
+df = pd.read_csv('PON 2-10.csv')
 
 HOST = '10.7.0.66'
 user = 'noc'
