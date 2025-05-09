@@ -5,8 +5,8 @@ import time
 df = pd.read_csv('trilhas - Página1.csv')
 
 HOST = '10.7.0.66'
-user = 'noc'
-password = '6O7noNaoiMClIn7e'
+user = 'USERNAME'
+password = 'PASSWORD'
 
 tn= telnetlib.Telnet(HOST, 23)
 tn.read_until(b"Username:")
